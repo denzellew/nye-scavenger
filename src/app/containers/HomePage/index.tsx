@@ -10,6 +10,10 @@ import { homePageActions, reducer, sliceKey } from './slice';
 
 const { Header, Content } = Layout;
 const { Title } = Typography;
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const num6Time = new Date(2020, 11, 31, 12, 0, 0);
+const num12Time = new Date(2020, 11, 31, 3, 0, 0);
 export function HomePage() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: homePageSaga });
@@ -37,6 +41,24 @@ export function HomePage() {
   let scavQuests: any[] = [];
   let restSkell = false;
   for (let i = 0; i < questions.length; i++) {
+    if (!restSkell && i === 5 && num6Time > new Date()) {
+      scavQuests.push(
+        <div>
+          <Title>Next Question available at 12PM (Refresh then)</Title>
+        </div>,
+      );
+      restSkell = true;
+    }
+
+    if (!restSkell && i === 11 && num12Time > new Date()) {
+      scavQuests.push(
+        <div>
+          <Title>Next Question available 3:00PM (Refresh then)</Title>
+        </div>,
+      );
+      restSkell = true;
+    }
+
     if (restSkell) {
       scavQuests.push(
         <>
@@ -61,6 +83,7 @@ export function HomePage() {
         </>,
       );
 
+      // Set the rest to skell
       if (!curQuest.isCorrect) {
         restSkell = true;
       }
