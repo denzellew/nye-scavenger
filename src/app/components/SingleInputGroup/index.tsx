@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import InputBox from './InputBox';
 
 interface Props {
-  amount: number;
+  word: string;
   autoFocus: boolean;
   inputRegExp: RegExp;
   password: boolean;
@@ -35,7 +35,7 @@ class SingleInputGroup extends Component<Props, State> {
 
   shouldComponentUpdate(nextProps) {
     if (
-      this.props.amount !== nextProps.amount ||
+      this.props.word !== nextProps.word ||
       this.props.inputRegExp !== nextProps.inputRegExp
     ) {
       return true;
@@ -46,7 +46,7 @@ class SingleInputGroup extends Component<Props, State> {
   renderItems() {
     let items: any[] = [];
 
-    for (var i = 0; i < this.props.amount; i++) {
+    for (var i = 0; i < this.props.word.length; i++) {
       items.push(
         <InputBox
           type="text"
@@ -55,7 +55,6 @@ class SingleInputGroup extends Component<Props, State> {
           handleFocus={this.handleFocus}
           handleChange={this.handleChange}
           name={'input' + i}
-          inputProps={this.props.inputProps}
           inputRef={el => {
             if (!el) return;
             this.inputElements[el.name] = el;
@@ -79,10 +78,6 @@ class SingleInputGroup extends Component<Props, State> {
     if (target.value.match(this.props.inputRegExp)) {
       this.focusNextChar(target);
       this.setModuleOutput(target);
-    } else {
-      target.value = this.state.characterArray[
-        target.name.replace('input', '')
-      ];
     }
   }
 

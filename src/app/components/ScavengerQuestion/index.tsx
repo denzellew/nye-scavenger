@@ -23,6 +23,7 @@ const defaultProps = {
 };
 
 const ScavengerQuestion = (props: Props) => {
+  const trueAnswer = props.answer?.toLocaleLowerCase().replace(' ', '') || '';
   const [userAnswer, setUserAnswer] = React.useState(props.userAnswer || '');
   const [isCorrect, setIsCorrect] = React.useState(false);
 
@@ -43,7 +44,7 @@ const ScavengerQuestion = (props: Props) => {
   };
 
   const submitAnswer = () => {
-    if (userAnswer === props.answer) {
+    if (userAnswer === trueAnswer) {
       setIsCorrect(true);
       success();
     } else {
@@ -56,9 +57,9 @@ const ScavengerQuestion = (props: Props) => {
     <Div>
       <div>{props.location}</div>
       <SingleInputGroup
-        amount={5}
+        word={trueAnswer}
         autoFocus={true}
-        inputRegExp={/^[0-9]$/}
+        inputRegExp={/^[a-zA-Z0-9_.-]*$/}
         password={false}
         handleOutputString={updateAnswer}
         inputProps={{ readonly: isCorrect }}
