@@ -1,4 +1,4 @@
-import { Layout, Typography } from 'antd';
+import { Divider, Layout, Skeleton, Typography } from 'antd';
 import ScavengerQuestion from 'app/components/ScavengerQuestion';
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
@@ -17,19 +17,34 @@ export function HomePage() {
   const dispatch = useDispatch();
 
   let scavQuests: any[] = [];
+  let restSkell = false;
   for (let i = 0; i < questions.length; i++) {
-    const curQuest = questions[i];
-    const scavProps = {
-      location: curQuest.location,
-      answer: curQuest.answer,
-      help: curQuest.answerHelp,
-      userAnswer: curQuest.userAnswer,
-      isCorrect: curQuest.isCorrect,
-    };
-    scavQuests.push(<ScavengerQuestion {...scavProps} />);
+    if (restSkell) {
+      scavQuests.push(
+        <>
+          <Skeleton avatar />
+          <Divider />
+        </>,
+      );
+    } else {
+      const curQuest = questions[i];
+      const scavProps = {
+        location: curQuest.location,
+        answer: curQuest.answer,
+        help: curQuest.answerHelp,
+        userAnswer: curQuest.userAnswer,
+        isCorrect: curQuest.isCorrect,
+      };
+      scavQuests.push(
+        <>
+          <ScavengerQuestion {...scavProps} />
+          <Divider />
+        </>,
+      );
 
-    if (!curQuest.isCorrect) {
-      break;
+      if (!curQuest.isCorrect) {
+        restSkell = true;
+      }
     }
   }
 

@@ -5,8 +5,8 @@ export const initQuestions: ScavengerQuestionModel[] = [
     location: 'This clue is found in the facet!',
     answer: 'Some Answer',
     answerHelp: 'Some help with this answer',
-    userAnswer: '',
-    isCorrect: true,
+    userAnswer: 'SomeAnswer',
+    isCorrect: false,
   },
   {
     location: 'This clue is found in a wet place!',

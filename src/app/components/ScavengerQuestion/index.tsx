@@ -25,7 +25,7 @@ const defaultProps = {
 const ScavengerQuestion = (props: Props) => {
   const trueAnswer = props.answer?.toLocaleLowerCase().replace(' ', '') || '';
   const [userAnswer, setUserAnswer] = React.useState(props.userAnswer || '');
-  const [isCorrect, setIsCorrect] = React.useState(false);
+  const [isCorrect, setIsCorrect] = React.useState(props.isCorrect || false);
 
   const success = () => {
     message.success('Correct Answer!');
