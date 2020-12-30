@@ -17,7 +17,7 @@ export function HomePage() {
           <Title style={{ color: '#FFF' }}>Scavenger Hunt</Title>
         </Header>
         <Content>
-          <ScavengerQuestion />
+          <ScavengerQuestion answer="new answer" />
         </Content>
       </Layout>
     </>

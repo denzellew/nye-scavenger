@@ -44,7 +44,7 @@ const ScavengerQuestion = (props: Props) => {
   };
 
   const submitAnswer = () => {
-    if (userAnswer === trueAnswer) {
+    if (userAnswer.toLowerCase() === trueAnswer) {
       setIsCorrect(true);
       success();
     } else {

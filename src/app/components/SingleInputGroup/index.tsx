@@ -19,7 +19,7 @@ class SingleInputGroup extends Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    this.state = { characterArray: [] };
+    this.state = { characterArray: props.word.split('').map(l => '') };
 
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
