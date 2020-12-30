@@ -3,11 +3,12 @@
  * ScavengerQuestion
  *
  */
-import { Button, message } from 'antd';
+import { Button, message, Typography } from 'antd';
 import * as React from 'react';
 import styled from 'styled-components/macro';
 import SingleInputGroup from '../SingleInputGroup';
 
+const { Title } = Typography;
 interface Props {
   location?: string;
   answer?: string;
@@ -53,10 +54,10 @@ const ScavengerQuestion = (props: Props) => {
   };
   return (
     <Div>
-      <div>{props.location}</div>
+      <Title level={4}>{props.location}</Title>
       <SingleInputGroup
-        word={trueAnswer}
-        autoFocus={false}
+        template={trueAnswer}
+        value={userAnswer}
         inputRegExp={/^[a-zA-Z0-9_.-]*$/}
         password={false}
         handleOutputString={updateAnswer}

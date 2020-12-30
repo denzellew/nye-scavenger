@@ -18,6 +18,7 @@ const Input = styled.input`
 
 interface Props {
   name: string;
+  value?: string;
   type?: string;
   handleKeyDown: (target) => any;
   handleFocus: (target) => any;
@@ -28,6 +29,7 @@ interface Props {
 
 export default function InputBox({
   type,
+  value,
   handleKeyDown,
   handleChange,
   handleFocus,
@@ -44,6 +46,7 @@ export default function InputBox({
       onFocus={handleFocus}
       maxLength={1}
       name={name}
+      value={value}
       ref={inputRef}
     />
   );

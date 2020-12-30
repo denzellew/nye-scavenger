@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import InputBox from './InputBox';
 
 interface Props {
-  word: string;
-  autoFocus: boolean;
+  template: string;
+  value: string;
   inputRegExp: RegExp;
   password: boolean;
   inputProps?: object;
@@ -19,7 +19,12 @@ class SingleInputGroup extends Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    this.state = { characterArray: props.word.split('').map(l => '') };
+
+    const charArray = props.template
+      .split('')
+      .map((l, i) => (props.value ? props.value[i] : ''));
+
+    this.state = { characterArray: charArray };
 
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
@@ -27,15 +32,9 @@ class SingleInputGroup extends Component<Props, State> {
     this.inputElements = {};
   }
 
-  componentDidMount() {
-    if (this.props.autoFocus) {
-      this.inputElements['input0'].select();
-    }
-  }
-
   shouldComponentUpdate(nextProps) {
     if (
-      this.props.word !== nextProps.word ||
+      this.props.template !== nextProps.template ||
       this.props.inputRegExp !== nextProps.inputRegExp
     ) {
       return true;
@@ -46,7 +45,7 @@ class SingleInputGroup extends Component<Props, State> {
   renderItems() {
     let items: any[] = [];
 
-    for (var i = 0; i < this.props.word.length; i++) {
+    for (var i = 0; i < this.state.characterArray.length; i++) {
       items.push(
         <InputBox
           type="text"
@@ -55,6 +54,7 @@ class SingleInputGroup extends Component<Props, State> {
           handleFocus={this.handleFocus}
           handleChange={this.handleChange}
           name={'input' + i}
+          value={this.state.characterArray[i]}
           inputProps={this.props.inputProps}
           inputRef={el => {
             if (!el) return;
