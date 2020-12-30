@@ -21,12 +21,21 @@ const defaultProps = {
   answer: 'Test Answer',
   help: 'Some kind of help',
 };
+
 const ScavengerQuestion = (props: Props) => {
   const [userAnswer, setUserAnswer] = React.useState(props.userAnswer || '');
+  const [isCorrect, setIsCorrect] = React.useState(false);
 
   const updateAnswer = output => {
     setUserAnswer(output);
   };
+
+  const submitAnswer = () => {
+    if (userAnswer === props.answer) {
+      setIsCorrect(true);
+    }
+  };
+
   console.log(userAnswer);
   return (
     <Div>
@@ -37,11 +46,14 @@ const ScavengerQuestion = (props: Props) => {
         inputRegExp={/^[0-9]$/}
         password={false}
         handleOutputString={updateAnswer}
+        inputProps={{ readonly: isCorrect }}
       />
       <Button type="primary" ghost>
         Need Help?
       </Button>
-      <Button type="primary">Submit</Button>
+      <Button type="primary" onClick={submitAnswer}>
+        Submit
+      </Button>
     </Div>
   );
 };

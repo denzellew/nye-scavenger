@@ -6,6 +6,7 @@ interface Props {
   autoFocus: boolean;
   inputRegExp: RegExp;
   password: boolean;
+  inputProps?: object;
   handleOutputString: (output) => any;
 }
 
@@ -54,6 +55,7 @@ class SingleInputGroup extends Component<Props, State> {
           handleFocus={this.handleFocus}
           handleChange={this.handleChange}
           name={'input' + i}
+          inputProps={this.props.inputProps}
           inputRef={el => {
             if (!el) return;
             this.inputElements[el.name] = el;
