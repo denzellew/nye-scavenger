@@ -15,5 +15,7 @@
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "appService.defaultWebAppToDeploy": "/subscriptions/c3f19e84-4d49-464a-b106-b8d41a9bfebf/resourceGroups/poc/providers/Microsoft.Web/sites/sudusayang",
+  "appService.deploySubpath": "build"
 }
