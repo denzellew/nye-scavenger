@@ -1,9 +1,10 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { initQuestions } from '../initData';
-import { ContainerState } from './types';
+import { ContainerState, ScavengerQuestionModel } from './types';
 
-interface SetQuestionAction {
+export interface UpdateQuestPayload {
+  currentQuestions: ScavengerQuestionModel[];
   index: number;
   userAnswer: string;
 }
@@ -16,13 +17,11 @@ const homePageSlice = createSlice({
   name: 'homePage',
   initialState,
   reducers: {
-    someAction(state, action: PayloadAction<any>) {},
-    setCorrect(state, action: PayloadAction<SetQuestionAction>) {
-      const questions = state.questions;
-      let currentQuestion = questions[action.payload.index];
-      currentQuestion.isCorrect = true;
-      currentQuestion.userAnswer = action.payload.userAnswer;
+    setQuestions(state, action: PayloadAction<ScavengerQuestionModel[]>) {
+      state.questions = action.payload;
     },
+    getQuests(state, action: PayloadAction<any>) {},
+    updateQuest(state, action: PayloadAction<UpdateQuestPayload>) {},
   },
 });
 
