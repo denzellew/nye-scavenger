@@ -1,4 +1,4 @@
-import { ScavengerQuestion } from 'app/components/ScavengerQuestion';
+import ScavengerQuestion from 'app/components/ScavengerQuestion';
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 

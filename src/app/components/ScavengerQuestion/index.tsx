@@ -16,8 +16,13 @@ interface Props {
   isCorrect?: boolean;
 }
 
-export function ScavengerQuestion(props: Props) {
-  const [userAnswer, setUserAnswer] = React.useState(props.userAnswer);
+const defaultProps = {
+  location: 'This clue is found in the facet',
+  answer: 'Test Answer',
+  help: 'Some kind of help',
+};
+const ScavengerQuestion = (props: Props) => {
+  const [userAnswer, setUserAnswer] = React.useState(props.userAnswer || '');
 
   const updateAnswer = output => {
     setUserAnswer(output);
@@ -25,7 +30,7 @@ export function ScavengerQuestion(props: Props) {
   console.log(userAnswer);
   return (
     <Div>
-      <div>This clue is found in the bathroom</div>
+      <div>{props.location}</div>
       <SingleInputGroup
         amount={5}
         autoFocus={true}
@@ -39,6 +44,10 @@ export function ScavengerQuestion(props: Props) {
       <Button type="primary">Submit</Button>
     </Div>
   );
-}
+};
+
+ScavengerQuestion.defaultProps = defaultProps;
 
 const Div = styled.div``;
+
+export default ScavengerQuestion;
