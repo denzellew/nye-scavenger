@@ -58,7 +58,7 @@ const ScavengerQuestion = (props: Props) => {
       <div>{props.location}</div>
       <SingleInputGroup
         word={trueAnswer}
-        autoFocus={true}
+        autoFocus={false}
         inputRegExp={/^[a-zA-Z0-9_.-]*$/}
         password={false}
         handleOutputString={updateAnswer}
