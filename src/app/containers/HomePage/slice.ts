@@ -17,11 +17,11 @@ const homePageSlice = createSlice({
   name: 'homePage',
   initialState,
   reducers: {
+    getQuests(state, action: PayloadAction<any>) {},
+    updateQuest(state, action: PayloadAction<UpdateQuestPayload>) {},
     setQuestions(state, action: PayloadAction<ScavengerQuestionModel[]>) {
       state.questions = action.payload;
     },
-    getQuests(state, action: PayloadAction<any>) {},
-    updateQuest(state, action: PayloadAction<UpdateQuestPayload>) {},
   },
 });
 

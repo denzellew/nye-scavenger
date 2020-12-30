@@ -1,31 +1,37 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { homePageActions, UpdateQuestPayload } from './slice';
 import { put, takeLatest } from 'redux-saga/effects';
+import { homePageActions, UpdateQuestPayload } from './slice';
+import { ScavengerQuestionModel } from './types';
 
 export function* homePageSaga() {
-  yield [
-    takeLatest(homePageActions.getQuests.type, getQuests),
-    takeLatest(homePageActions.updateQuest.type, updateQuest),
-  ];
+  yield takeLatest(homePageActions.updateQuest.type, performUpdateQuest);
+  yield takeLatest(homePageActions.getQuests.type, performGetQuests);
 }
 
-export function* updateQuest(action: PayloadAction<UpdateQuestPayload>) {
+export function* performUpdateQuest(action: PayloadAction<UpdateQuestPayload>) {
   // Update Quest
   const questions = action.payload.currentQuestions;
-  let currentQuestion = questions[action.payload.index];
-  currentQuestion.isCorrect = true;
-  currentQuestion.userAnswer = action.payload.userAnswer;
+  const currentQuestion = questions[action.payload.index];
+  const changes = { isCorrect: true, userAnswer: action.payload.userAnswer };
+  const newQuest = { ...currentQuestion, ...changes };
 
   // Save Quests
-  const newQuestions = [...questions];
-  const newSave = JSON.stringify(newQuestions);
+  const newQuests: ScavengerQuestionModel[] = [];
+  for (let i = 0; i < questions.length; i++) {
+    if (i === action.payload.index) {
+      newQuests.push(newQuest);
+    } else {
+      newQuests.push(questions[i]);
+    }
+  }
+  const newSave = JSON.stringify(newQuests);
   localStorage.setItem('quests', newSave);
 
   // Set Quests
-  yield put({ type: homePageActions.setQuestions, payload: newQuestions });
+  yield put({ type: homePageActions.setQuestions, payload: newQuests });
 }
 
-export function* getQuests(action: PayloadAction<UpdateQuestPayload>) {
+export function* performGetQuests(action) {
   // Get Quests
   const storedQuestStr = localStorage.getItem('quests');
 
