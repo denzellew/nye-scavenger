@@ -14,6 +14,7 @@ interface Props {
   userAnswer?: string;
   help?: any;
   isCorrect?: boolean;
+  onCorrectAnswer: (answer: string) => any;
 }
 
 const defaultProps = {
@@ -23,9 +24,8 @@ const defaultProps = {
 };
 
 const ScavengerQuestion = (props: Props) => {
-  const trueAnswer = props.answer?.toLocaleLowerCase().replace(' ', '') || '';
+  const trueAnswer = props.answer?.toLocaleLowerCase().replace(/\s/g, '') || '';
   const [userAnswer, setUserAnswer] = React.useState(props.userAnswer || '');
-  const [isCorrect, setIsCorrect] = React.useState(props.isCorrect || false);
 
   const success = () => {
     message.success('Correct Answer!');
@@ -45,14 +45,12 @@ const ScavengerQuestion = (props: Props) => {
 
   const submitAnswer = () => {
     if (userAnswer.toLowerCase() === trueAnswer) {
-      setIsCorrect(true);
       success();
+      props.onCorrectAnswer(userAnswer);
     } else {
       error();
     }
   };
-
-  console.log(userAnswer);
   return (
     <Div>
       <div>{props.location}</div>
@@ -62,7 +60,7 @@ const ScavengerQuestion = (props: Props) => {
         inputRegExp={/^[a-zA-Z0-9_.-]*$/}
         password={false}
         handleOutputString={updateAnswer}
-        inputProps={{ readonly: isCorrect }}
+        inputProps={{ readonly: props.isCorrect }}
       />
       <Button
         type="primary"

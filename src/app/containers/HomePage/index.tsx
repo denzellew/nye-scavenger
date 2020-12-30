@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet-async';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInjectReducer } from 'redux-injectors';
 import { selectQuestions } from './selectors';
-import { reducer, sliceKey } from './slice';
+import { homePageActions, reducer, sliceKey } from './slice';
 
 const { Header, Content } = Layout;
 const { Title } = Typography;
@@ -15,6 +15,9 @@ export function HomePage() {
   const questions = useSelector(selectQuestions);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dispatch = useDispatch();
+  const onCorrectAnswer = (index, userAnswer) => {
+    dispatch(homePageActions.setCorrect({ index, userAnswer }));
+  };
 
   let scavQuests: any[] = [];
   let restSkell = false;
@@ -34,6 +37,7 @@ export function HomePage() {
         help: curQuest.answerHelp,
         userAnswer: curQuest.userAnswer,
         isCorrect: curQuest.isCorrect,
+        onCorrectAnswer: answer => onCorrectAnswer(i, answer),
       };
       scavQuests.push(
         <>
