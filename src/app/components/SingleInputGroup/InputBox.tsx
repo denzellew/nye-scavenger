@@ -3,15 +3,15 @@ import styled from 'styled-components';
 
 const Input = styled.input`
   justify-content: space-between;
-  width: 1.25rem;
-  height: 1.25rem;
-  margin: 5px;
+  width: 1.5rem;
+  height: 1.75rem;
+  margin: 5px 10px 5px 0;
   border-radius: 0;
   border-top: 0;
   border-left: 0;
   border-right: 0;
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
     'Helvetica Neue', Arial sans-serif;
 `;

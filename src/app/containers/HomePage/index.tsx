@@ -1,5 +1,6 @@
 import { Divider, Layout, Skeleton, Typography } from 'antd';
 import ScavengerQuestion from 'app/components/ScavengerQuestion';
+import { BackgroundColor } from 'chalk';
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,7 +10,7 @@ import { selectQuestions } from './selectors';
 import { homePageActions, reducer, sliceKey } from './slice';
 
 const { Header, Content } = Layout;
-const { Title } = Typography;
+const { Title, Paragraph } = Typography;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const num6Time = new Date(2020, 11, 31, 12, 0, 0);
@@ -95,14 +96,41 @@ export function HomePage() {
   return (
     <>
       <Helmet>
-        <title>Home Page</title>
-        <meta name="description" content="A Boilerplate application homepage" />
+        <title>Sudu's Sayang 2020 NYE Scavenger Hunt</title>
+        <meta
+          name="description"
+          content="Farewell and FUCK YOU 2020, Love you!"
+        />
       </Helmet>
       <Layout>
-        <Header>
-          <Title style={{ color: '#FFF' }}>Scavenger Hunt</Title>
+        <Header
+          style={{
+            height: 'auto',
+            backgroundColor: 'fuchsia',
+            padding: '1rem',
+          }}
+        >
+          <Title
+            style={{ color: '#FFF', fontSize: '1.75rem', textAlign: 'center' }}
+          >
+            Sudu's Sayang
+            <br />
+            2020 NYE Scavenger Hunt
+          </Title>
         </Header>
-        <Content>{scavQuests}</Content>
+        <Content style={{ padding: '1rem' }}>
+          <Title level={3}>
+            Answer the question on the clue to get the next prize!
+          </Title>
+          <Paragraph>
+            No Spaces for multiple words (i.e. Two Words = Two Words)
+            <br />
+            Case doesn't matter
+            <br />
+            Dates are entered MMDDYYYY (i.e. 12312021)
+          </Paragraph>
+          {scavQuests}
+        </Content>
       </Layout>
     </>
   );
