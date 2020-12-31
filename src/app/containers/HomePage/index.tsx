@@ -41,15 +41,17 @@ export function HomePage() {
   let scavQuests: any[] = [];
   let restSkell = false;
   for (let i = 0; i < questions.length; i++) {
+    // Stop if up to 5 before noon
     if (!restSkell && i === 5 && num6Time > new Date()) {
       scavQuests.push(
         <div>
-          <Title>Next Question available at 12PM (Refresh then)</Title>
+          <Title>Next Question available at 12:00PM (Refresh then)</Title>
         </div>,
       );
       restSkell = true;
     }
 
+    // Stop if up to 12 before 3
     if (!restSkell && i === 11 && num12Time > new Date()) {
       scavQuests.push(
         <div>

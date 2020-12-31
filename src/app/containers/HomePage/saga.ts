@@ -37,7 +37,7 @@ export function* performGetQuests(action) {
 
   // Update if available
   if (storedQuestStr) {
-    const quests = JSON.parse(storedQuestStr); // Set Quests
+    const quests = JSON.parse(storedQuestStr) as ScavengerQuestionModel[]; // Set Quests
     yield put({ type: homePageActions.setQuestions, payload: quests });
   }
 }
