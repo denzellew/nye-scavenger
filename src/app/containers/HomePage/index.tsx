@@ -1,6 +1,5 @@
 import { Divider, Layout, Skeleton, Typography } from 'antd';
 import ScavengerQuestion from 'app/components/ScavengerQuestion';
-import { BackgroundColor } from 'chalk';
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useDispatch, useSelector } from 'react-redux';
