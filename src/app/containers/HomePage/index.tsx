@@ -12,8 +12,10 @@ const { Header, Content } = Layout;
 const { Title, Paragraph } = Typography;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const num6Time = new Date(2020, 11, 31, 12, 0, 0);
-const num12Time = new Date(2020, 11, 31, 3, 0, 0);
+const num4Time = new Date(2020, 11, 31, 6, 0, 0);
+const num6Time = new Date(2020, 11, 31, 10, 0, 0);
+const num8Time = new Date(2020, 11, 31, 12, 0, 0);
+const num12Time = new Date(2020, 11, 31, 15, 0, 0);
 export function HomePage() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: homePageSaga });
@@ -41,8 +43,26 @@ export function HomePage() {
   let scavQuests: any[] = [];
   let restSkell = false;
   for (let i = 0; i < questions.length; i++) {
-    // Stop if up to 5 before noon
+    // Stop if up to 4 before 6am
+    if (!restSkell && i === 3 && num4Time > new Date()) {
+      scavQuests.push(
+        <div>
+          <Title>Next Question available at 6:00AM (Refresh then)</Title>
+        </div>,
+      );
+      restSkell = true;
+    }
+    // Stop if up to 6 before 9am
     if (!restSkell && i === 5 && num6Time > new Date()) {
+      scavQuests.push(
+        <div>
+          <Title>Next Question available at 10:00AM (Refresh then)</Title>
+        </div>,
+      );
+      restSkell = true;
+    }
+    // Stop if up to 5 before noon
+    if (!restSkell && i === 5 && num8Time > new Date()) {
       scavQuests.push(
         <div>
           <Title>Next Question available at 12:00PM (Refresh then)</Title>
